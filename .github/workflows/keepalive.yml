@@ -1,0 +1,22 @@
+name: KeepAlive
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+
+  keepalive:
+
+    name: Cronjob based github action
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Keep GitHub cron jobs alive using dummy commits
+        uses: gautamkrishnar/keepalive-workflow@v1
