@@ -2,14 +2,14 @@
 set -euE -o pipefail
 trap 'echo "${0##*/}: failed @ line $LINENO: $BASH_COMMAND"' ERR
 
-# print a list of domains
-get_domains()
+# domains
+domains()
 {
 	fetch 'https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/domains.txt' | grep -v '\.ir$'
 }
 
-# print a list of IPv4 and IPv6 CIDRs
-get_ips()
+# IPv4 and IPv6 CIDRs
+ips()
 {
 	fetch 'https://raw.githubusercontent.com/bootmortis/ito-gov-mirror/main/out/domains.csv' | sed 1d | cut -d, -f2
 	fetch 'https://www.arvancloud.ir/en/ips.txt'
@@ -19,13 +19,6 @@ get_ips()
 	fetch 'https://ips.f95.com'
 }
 
-# download the given URL to stdout
-fetch()
-{
-	echo "fetching '$1'..." >&2
-	curl --write-out '\n' --connect-timeout 20 -fsSL -- "$1"
-}
-
 main()
 {
 	# ==================================================
@@ -33,16 +26,23 @@ main()
 	# ==================================================
 
 	# create an array of domains
-	readarray -t domains < <(get_domains | sort --unique)
+	readarray -t domains < <(domains | despace)
 
 	# create an array of IPs
-	readarray -t ips < <(get_ips)
+	readarray -t ips < <(ips | despace)
+
+	# ==================================================
+	# = process domains
+	# ==================================================
+
+	echo 'generating rules' >&2
+
+	# deduplicate domains
+	readarray -t domains < <(printf '%s\n' "${domains[@]}" | sort --unique)
 
 	# ==================================================
 	# = process IPs
 	# ==================================================
-
-	echo 'generating rules...' >&2
 
 	ip4=()
 	ip6=()
@@ -110,16 +110,34 @@ main()
 	rm -rf -- output/*
 	cd output
 
-	printf '%s\n' "${rules[@]}"      > rules.txt
+	printf '%s\n' "${rules[@]}" > rules.txt
 	printf '%s\n' "${rules_yaml[@]}" > rules.yaml
 
-	echo 'generating checksum...' >&2
+	echo 'generating checksum' >&2
 
 	for f in *; do
 		sha256sum "$f" > "$f.sha256"
 	done
 
 	echo 'done.' >&2
+}
+
+# download the given URL to stdout
+fetch()
+{
+	echo "fetching $1 " >&2
+	curl --write-out '\n' --connect-timeout 20 -fsSL -- "$1"
+}
+
+# remove empty lines and trailing spaces
+despace()
+{
+	while IFS= read -r line; do
+		set -- $line
+		if [[ $# -ge 1 ]]; then
+			printf '%s\n' "$1"
+		fi
+	done
 }
 
 main "$@"
