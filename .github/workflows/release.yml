@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       PRE_RELEASE:
-        description: Set release type to pre-release
+        description: pre-release
         type: boolean
         required: false
         default: false
