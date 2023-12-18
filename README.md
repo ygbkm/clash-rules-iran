@@ -11,9 +11,9 @@ Automatically updated every day.
 
 Clash rules are available in `text` and `yaml` formats.
 
-the `text` format is preferred as it's smaller and faster to process.
+The `text` format is preferred as it's smaller and faster to process.
 
-the `text` format is supported in:
+The `text` format is supported in:
 
 - Mihomo (formerly Clash.Meta) 1.14.4+
 - Clash Premium 1.15.0+
