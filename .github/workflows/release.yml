@@ -7,7 +7,7 @@ on:
 
   workflow_dispatch:
     inputs:
-      PRE_RELEASE:
+      pre_release:
         description: pre-release
         type: boolean
         required: false
@@ -48,4 +48,4 @@ jobs:
           delete_tags: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        if: ${{ ! inputs.PRE_RELEASE }}
+        if: ${{ ! inputs.pre_release }}
