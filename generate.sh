@@ -114,10 +114,7 @@ main()
 	printf '%s\n' "${rules_yaml[@]}" > rules.yaml
 
 	echo 'generating checksum' >&2
-
-	for f in *; do
-		sha256sum "$f" > "$f.sha256"
-	done
+	sha256sum -- * > SHA256SUMS
 
 	echo 'done.' >&2
 }
