@@ -1,17 +1,23 @@
 #!/bin/bash
+
+# catch errors
 set -euE -o pipefail
 trap 'echo "${0##*/}: failed @ line $LINENO: $BASH_COMMAND"' ERR
 
-# domains
+# domains source
 domains()
 {
+	# non-dot-ir Iranian domains
 	fetch 'https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/domains.txt' | grep -v '\.ir$'
 }
 
-# IPv4 and IPv6 CIDRs
+# IPv4 and IPv6 CIDRs source
 ips()
 {
+	# Iranian messenger apps
 	fetch 'https://raw.githubusercontent.com/bootmortis/ito-gov-mirror/main/out/domains.csv' | sed 1d | cut -d, -f2
+
+	# Iranian datacenters
 	fetch 'https://www.arvancloud.ir/en/ips.txt'
 	fetch 'https://api.derak.cloud/public/ipv4'
 	fetch 'https://api.derak.cloud/public/ipv6'
@@ -50,14 +56,16 @@ main()
 	# separate IPv4 and IPv6 CIDRs from each other and correct their formatting
 	for ip in "${ips[@]}"; do
 		case $ip in
-			*:*) # IPv6
+			# IPv6
+			*:*)
 				case $ip in
 					*/[0-9]*) ;;
 					*) ip=$ip/128 ;;
 				esac
 				ip6+=("${ip@L}")
 			;;
-			*[0-9].[0-9]*) # IPv4
+			# IPv4
+			*[0-9].[0-9]*)
 				case $ip in
 					*/[0-9]*) ;;
 					*) ip=$ip/32 ;;
@@ -72,7 +80,7 @@ main()
 	readarray -t ip6 < <(printf '%s\n' "${ip6[@]}" | sort --unique)
 
 	# ==================================================
-	# = generate text rules
+	# = generate rules for the text format
 	# ==================================================
 
 	rules=(
@@ -93,7 +101,7 @@ main()
 	done
 
 	# ==================================================
-	# = generate yaml rules
+	# = generate rules for the yaml format
 	# ==================================================
 
 	rules_yaml=('payload:')
@@ -103,7 +111,7 @@ main()
 	done
 
 	# ==================================================
-	# = write rules to files
+	# = write the rules to disk
 	# ==================================================
 
 	mkdir -p output
@@ -126,7 +134,7 @@ fetch()
 	curl --write-out '\n' --connect-timeout 20 -fsSL -- "$1"
 }
 
-# remove empty lines and trailing spaces
+# remove empty lines and trailing spaces from stdin
 despace()
 {
 	while IFS= read -r line; do
