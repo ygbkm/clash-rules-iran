@@ -1,4 +1,4 @@
-name: Generate rules and create release
+name: Release
 
 on:
 
