@@ -1,14 +1,17 @@
-name: Keep GitHub cron jobs alive
+name: GitHub Actions KeepAlive
 
 on:
+
   schedule:
     - cron: '30 1 * * *'
+
+  workflow_dispatch:
 
 jobs:
 
   keepalive:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       contents: write
 
@@ -18,4 +21,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Keep GitHub cron jobs alive using dummy commits
-        uses: gautamkrishnar/keepalive-workflow@v1
+        run: |
+          now=$(date +%s)
+          last_commit=$(git log --format=%ct --max-count=1)
+          days_since_last_commit=$(( ( now - last_commit ) / ( 60 * 60 * 24 ) ))
+          echo "$days_since_last_commit days since last commit"
+          if [ "$days_since_last_commit" -lt 50 ]; then
+            exit
+          fi
+          echo 'creating keepalive commit...'
+          git config user.name 'github-actions'
+          git config user.email 'actions@github.com'
+          git checkout -B github-actions-keepalive
+          git commit --allow-empty --message='github actions keepalive commit'
+          git push --set-upstream origin github-actions-keepalive
