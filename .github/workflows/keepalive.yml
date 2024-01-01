@@ -1,11 +1,8 @@
 name: github actions keepalive
 
 on:
-
   schedule:
     - cron: '30 1 * * *'
-
-  workflow_dispatch:
 
 jobs:
 
@@ -19,19 +16,36 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # fetch all branches
 
       - name: Keep GitHub cron jobs alive using dummy commits
         run: |
+
+          wanted_days_since=45
+          branch=github-actions-keepalive
+
           now=$(date +%s)
           last_commit=$(git log --format=%ct --max-count=1)
-          days_since_last_commit=$(( ( now - last_commit ) / ( 60 * 60 * 24 ) ))
-          echo "$days_since_last_commit days since last commit"
-          if [ "$days_since_last_commit" -lt 50 ]; then
+          actual_days_since=$(( ( now - last_commit ) / ( 60 * 60 * 24 ) ))
+
+          echo "wanted days since last commit: $wanted_days_since"
+          echo "actual days since last commit: $actual_days_since"
+
+          if [ "$actual_days_since" -lt "$wanted_days_since" ]; then
+            echo 'nothing to do.'
             exit
           fi
+
           echo 'creating keepalive commit...'
+
           git config user.name 'github-actions'
           git config user.email 'actions@github.com'
-          git checkout -B github-actions-keepalive
+
+          if ! git branch --remotes | awk '{ print $1 }' | grep -Fxq "origin/$branch"; then
+            git branch "$branch"
+          fi
+
+          git checkout "$branch"
           git commit --allow-empty --message='github actions keepalive commit'
-          git push --set-upstream origin github-actions-keepalive
+          git push origin "$branch"
