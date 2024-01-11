@@ -1,4 +1,4 @@
-name: github actions keepalive
+name: github-actions-keepalive
 
 on:
   schedule:
