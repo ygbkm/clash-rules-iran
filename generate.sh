@@ -115,7 +115,6 @@ main()
 	# ==================================================
 
 	mkdir -p output
-	rm -rf -- output/*
 	cd output
 
 	printf '%s\n' "${rules[@]}" > rules.txt
