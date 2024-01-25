@@ -1,4 +1,6 @@
-# Clash Rules for Iran
+# Clash rules for Iran
+
+[![Latest Release](https://img.shields.io/github/release-date/koonix/clash-rules-iran?display_date=published_at&label=Latest%20Release&color=%23347d39)](https://github.com/koonix/clash-rules-iran/releases)
 
 Single-file classical
 [Clash](https://github.com/topics/clash)
@@ -6,6 +8,11 @@ and [Mihomo](https://github.com/MetaCubeX/mihomo/tree/Meta)
 rules for routing Iranian domains and IPs.
 
 Automatically updated every day.
+
+| Format | Download link |
+|--------|---------------|
+| Text   | https://github.com/koonix/clash-rules-iran/releases/latest/download/rules.yaml |
+| Yaml   | https://github.com/koonix/clash-rules-iran/releases/latest/download/rules.txt |
 
 ## Note about formats
 
