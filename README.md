@@ -9,21 +9,12 @@ rules for routing Iranian domains and IPs.
 
 Automatically updated every day.
 
+## Download
+
 | Format | Download link |
 |--------|---------------|
 | Text   | https://github.com/koonix/clash-rules-iran/releases/latest/download/rules.yaml |
 | Yaml   | https://github.com/koonix/clash-rules-iran/releases/latest/download/rules.txt |
-
-## Note about formats
-
-Clash rules are available in `text` and `yaml` formats.
-
-The `text` format is preferred as it's smaller and faster to process.
-
-The `text` format is supported in:
-
-- Mihomo (formerly Clash.Meta) 1.14.4+
-- Clash Premium 1.15.0+
 
 ## Usage
 
@@ -58,3 +49,14 @@ rule-providers:
 rules:
   - RULE-SET,iran,DIRECT
 ```
+
+## Note about formats
+
+Clash rules are available in `text` and `yaml` formats.
+
+The `text` format is preferred as it's smaller and faster to process.
+
+The `text` format is supported in:
+
+- Mihomo (formerly Clash.Meta) 1.14.4+
+- Clash Premium 1.15.0+
