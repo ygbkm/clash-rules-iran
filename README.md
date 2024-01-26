@@ -1,6 +1,7 @@
 # Clash rules for Iran
 
 [![Latest Release](https://img.shields.io/github/release-date/koonix/clash-rules-iran?display_date=published_at&label=Latest%20Release&color=%23347d39)](https://github.com/koonix/clash-rules-iran/releases)
+[![Downloads](https://img.shields.io/github/downloads/koonix/clash-rules-iran/total?label=Downloads&color=%23347d39)](https://github.com/koonix/clash-rules-iran/releases)
 
 Single-file classical
 [Clash](https://github.com/topics/clash)
