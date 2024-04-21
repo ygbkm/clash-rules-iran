@@ -14,8 +14,8 @@ Automatically updated every day.
 
 | Format | Download link |
 |--------|---------------|
-| Text   | https://github.com/koonix/clash-rules-iran/releases/latest/download/rules.yaml |
-| Yaml   | https://github.com/koonix/clash-rules-iran/releases/latest/download/rules.txt |
+| Yaml   | https://github.com/koonix/clash-rules-iran/releases/latest/download/rules.yaml |
+| Text   | https://github.com/koonix/clash-rules-iran/releases/latest/download/rules.txt |
 
 ## Usage
 
