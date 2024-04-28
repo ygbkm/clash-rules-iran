@@ -26,7 +26,7 @@ jobs:
           branch=github-actions-keepalive
 
           now=$(date +%s)
-          last_commit=$(git log --format=%ct --max-count=1)
+          last_commit=$(git log --all --format=%ct --max-count=1)
           actual_days_since=$(( ( now - last_commit ) / ( 60 * 60 * 24 ) ))
 
           echo "wanted days since last commit: $wanted_days_since"
