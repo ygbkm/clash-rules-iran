@@ -11,26 +11,10 @@ Automatically updated every day.
 
 | Format | Download link |
 |--------|---------------|
-| Yaml   | https://github.com/ygbkm/clash-rules-iran/releases/latest/download/rules.yaml |
 | Text   | https://github.com/ygbkm/clash-rules-iran/releases/latest/download/rules.txt |
+| Yaml   | https://github.com/ygbkm/clash-rules-iran/releases/latest/download/rules.yaml |
 
 ## Usage
-
-### Yaml format
-
-```yaml
-rule-providers:
-  iran:
-    type: http
-    format: yaml
-    behavior: classical
-    url: https://github.com/ygbkm/clash-rules-iran/releases/latest/download/rules.yaml
-    path: ./ruleset/iran.yaml
-    interval: 86400
-
-rules:
-  - RULE-SET,iran,DIRECT
-```
 
 ### Text format
 
@@ -42,6 +26,22 @@ rule-providers:
     behavior: classical
     url: https://github.com/ygbkm/clash-rules-iran/releases/latest/download/rules.txt
     path: ./ruleset/iran.txt
+    interval: 86400
+
+rules:
+  - RULE-SET,iran,DIRECT
+```
+
+### Yaml format
+
+```yaml
+rule-providers:
+  iran:
+    type: http
+    format: yaml
+    behavior: classical
+    url: https://github.com/ygbkm/clash-rules-iran/releases/latest/download/rules.yaml
+    path: ./ruleset/iran.yaml
     interval: 86400
 
 rules:
