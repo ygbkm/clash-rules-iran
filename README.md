@@ -1,6 +1,5 @@
 # Clash rules for Iran
 
-[![Latest Release](https://img.shields.io/github/release-date/ygbkm/clash-rules-iran?display_date=published_at&label=Latest%20Release&color=%23347d39)](https://github.com/ygbkm/clash-rules-iran/releases)
 [![Downloads](https://img.shields.io/github/downloads/ygbkm/clash-rules-iran/total?label=Downloads&color=%23347d39)](https://github.com/ygbkm/clash-rules-iran/releases)
 
 Single-file classical
