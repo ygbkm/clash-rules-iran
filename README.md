@@ -1,7 +1,5 @@
 # Clash rules for Iran
 
-[![Downloads](https://img.shields.io/github/downloads/ygbkm/clash-rules-iran/total?label=Downloads&color=%23347d39)](https://github.com/ygbkm/clash-rules-iran/releases)
-
 Single-file classical
 [Clash](https://github.com/topics/clash)
 and [Mihomo](https://github.com/MetaCubeX/mihomo/tree/Meta)
