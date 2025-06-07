@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # fetch all branches
+          fetch-depth: 0 # Fetch all branches
 
       - name: Keep GitHub cron jobs alive using dummy commits
         run: |
