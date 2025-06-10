@@ -23,6 +23,7 @@ jobs:
           mkdir release
           cd release
           ../generate.sh
+          sha256sum -- * > SHA256SUMS
 
       - name: Create release
         run: |
