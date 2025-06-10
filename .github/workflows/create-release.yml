@@ -24,19 +24,14 @@ jobs:
           cd release
           ../generate.sh
 
-      - name: Set variables
-        run: |
-          echo "TAG_NAME=$(date --utc '+%Y%m%d%H%M%S')" >> "$GITHUB_ENV"
-          echo "RELEASE_NAME=$(date --utc '+%Y-%m-%d')" >> "$GITHUB_ENV"
-          echo "RELEASE_DATE=$(date --utc '+%F %T %Z')" >> "$GITHUB_ENV"
-
       - name: Create release
-        uses: ncipollo/release-action@v1
-        with:
-          name: ${{ env.RELEASE_NAME }}
-          body: ${{ env.RELEASE_DATE }}
-          tag: ${{ env.TAG_NAME }}
-          artifacts: release/*
+        run: |
+          title=$(date --utc '+%Y-%m-%d')
+          note=$(date --utc '+%F %T %Z')
+          tag=$(date --utc '+%Y%m%d%H%M%S')
+          gh release create --title="$title" --notes="$note" -- "$tag" release/*
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - name: Delete old releases
         run: |
