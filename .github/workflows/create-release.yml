@@ -25,6 +25,17 @@ jobs:
           ../generate.sh
           sha256sum -- * > SHA256SUMS
 
+      - name: Fail if the artifacts are too big
+        run: |
+          cd release
+          ok=true
+          max_size=$(( 20 * 1024 * 1024 )) && echo "max-size: $max_size"
+          for file in *; do
+            size=$(stat --format=%s -- "$file") && echo "$file: $size"
+            [[ $size -gt $max_size ]] && ok=false && echo "$file exceeds max-size"
+          done
+          [[ $ok == true ]]
+
       - name: Create release
         run: |
           title=$(date --utc '+%Y-%m-%d')
