@@ -21,11 +21,8 @@ ips()
 	fetch 'https://raw.githubusercontent.com/bootmortis/ito-gov-mirror/main/out/domains.csv' | sed 1d | cut -d, -f2
 
 	# Iranian datacenters
-	fetch 'https://www.arvancloud.ir/en/ips.txt'
-	fetch 'https://api.derak.cloud/public/ipv4'
-	fetch 'https://api.derak.cloud/public/ipv6'
-	fetch 'https://parspack.com/cdnips.txt'
-	fetch 'https://ips.f95.com'
+	fetch 'https://raw.githubusercontent.com/ygbkm/resources/refs/heads/main/resources/iran-datacenters/ipv4.txt'
+	fetch 'https://raw.githubusercontent.com/ygbkm/resources/refs/heads/main/resources/iran-datacenters/ipv6.txt'
 }
 
 main()
